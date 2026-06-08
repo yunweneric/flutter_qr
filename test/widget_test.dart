@@ -6,8 +6,8 @@ void main() {
     await tester.pumpWidget(const MiniQrApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('Mini QR Code Generator'), findsOneWidget);
-    expect(find.text('Download PNG'), findsOneWidget);
-    expect(find.text('Data to encode'), findsOneWidget);
+    expect(find.text('Mini QR'), findsOneWidget);
+    expect(find.text('Export PNG'), findsOneWidget);
+    expect(find.text('Preset'), findsOneWidget);
   });
 }

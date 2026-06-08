@@ -19,43 +19,53 @@ class ExportBar extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        FilledButton.icon(
-          onPressed: isBusy ? null : onDownloadPng,
-          style: FilledButton.styleFrom(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        Expanded(
+          flex: 2,
+          child: SizedBox(
+            height: 46,
+            child: FilledButton.icon(
+              onPressed: isBusy ? null : onDownloadPng,
+              icon: isBusy
+                  ? SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: scheme.onPrimary,
+                      ),
+                    )
+                  : const Icon(Icons.download_rounded, size: 17),
+              label: Text(isBusy ? 'Working…' : 'Export PNG'),
+            ),
           ),
-          icon: isBusy
-              ? SizedBox(
-                  width: 15,
-                  height: 15,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: scheme.onPrimary,
-                  ),
-                )
-              : const Icon(Icons.download_rounded, size: 17),
-          label: const Text('Export PNG'),
         ),
         const SizedBox(width: 8),
-        OutlinedButton.icon(
-          onPressed: isBusy ? null : onSaveConfig,
-          style: OutlinedButton.styleFrom(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        Expanded(
+          child: SizedBox(
+            height: 46,
+            child: OutlinedButton.icon(
+              onPressed: isBusy ? null : onSaveConfig,
+              icon: const Icon(Icons.bookmark_outline_rounded, size: 16),
+              label: const Text('Save'),
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+              ),
+            ),
           ),
-          icon: const Icon(Icons.bookmark_outline_rounded, size: 17),
-          label: const Text('Save'),
         ),
         const SizedBox(width: 8),
-        OutlinedButton.icon(
-          onPressed: isBusy ? null : onLoadConfig,
-          style: OutlinedButton.styleFrom(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        Expanded(
+          child: SizedBox(
+            height: 46,
+            child: OutlinedButton.icon(
+              onPressed: isBusy ? null : onLoadConfig,
+              icon: const Icon(Icons.folder_open_rounded, size: 16),
+              label: const Text('Load'),
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+              ),
+            ),
           ),
-          icon: const Icon(Icons.folder_open_rounded, size: 17),
-          label: const Text('Load'),
         ),
       ],
     );

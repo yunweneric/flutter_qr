@@ -28,25 +28,28 @@ class _MiniQrAppState extends State<MiniQrApp> {
       themeMode: _themeMode,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
+      themeAnimationDuration: const Duration(milliseconds: 350),
+      themeAnimationCurve: Curves.easeInOut,
       home: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 48,
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 28,
-                height: 28,
+                width: 24,
+                height: 24,
                 decoration: BoxDecoration(
                   color: const Color(0xFF6366F1),
-                  borderRadius: BorderRadius.circular(7),
+                  borderRadius: BorderRadius.circular(6),
                 ),
                 child: const Icon(
                   Icons.qr_code_rounded,
                   color: Colors.white,
-                  size: 16,
+                  size: 14,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 8),
               const Text('Mini QR'),
             ],
           ),
@@ -57,14 +60,23 @@ class _MiniQrAppState extends State<MiniQrApp> {
                 _themeMode =
                     _isDark ? ThemeMode.light : ThemeMode.dark;
               }),
-              icon: Icon(
-                _isDark
-                    ? Icons.light_mode_outlined
-                    : Icons.dark_mode_outlined,
-                size: 20,
+              icon: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                switchInCurve: Curves.easeOutBack,
+                transitionBuilder: (child, animation) => RotationTransition(
+                  turns: Tween<double>(begin: 0.6, end: 1).animate(animation),
+                  child: FadeTransition(opacity: animation, child: child),
+                ),
+                child: Icon(
+                  _isDark
+                      ? Icons.light_mode_outlined
+                      : Icons.dark_mode_outlined,
+                  key: ValueKey(_isDark),
+                  size: 18,
+                ),
               ),
+              visualDensity: VisualDensity.compact,
             ),
-            const SizedBox(width: 4),
           ],
         ),
         body: const CreatePage(),

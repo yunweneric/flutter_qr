@@ -7,6 +7,7 @@ import 'package:flutter_qr/data/presets.dart';
 import 'package:flutter_qr/features/create/widgets/export_bar.dart';
 import 'package:flutter_qr/features/create/widgets/qr_preview.dart';
 import 'package:flutter_qr/features/create/widgets/style_panel.dart';
+import 'package:flutter_qr/features/create/widgets/ui_kit.dart';
 import 'package:flutter_qr/models/qr_config.dart';
 import 'package:flutter_qr/services/config_service.dart';
 import 'package:flutter_qr/services/export_service.dart';
@@ -174,55 +175,60 @@ class _CreatePageState extends State<CreatePage> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isWide = constraints.maxWidth >= 768;
+        final isWide = constraints.maxWidth >= 860;
 
         if (isWide) {
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Left: preview + export actions
-              Expanded(
-                flex: 5,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(28),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      preview,
-                      const SizedBox(height: 16),
-                      exportBar,
-                    ],
-                  ),
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1320),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      flex: 46,
+                      child: FadeSlideIn(
+                        duration: const Duration(milliseconds: 460),
+                        child: Column(
+                          children: [
+                            Expanded(child: preview),
+                            const SizedBox(height: 14),
+                            exportBar,
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 18),
+                    Expanded(
+                      flex: 54,
+                      child: FadeSlideIn(
+                        duration: const Duration(milliseconds: 620),
+                        child: SingleChildScrollView(
+                          child: controls,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              VerticalDivider(
-                width: 1,
-                color: Theme.of(context).dividerColor,
-              ),
-              // Right: style controls
-              Expanded(
-                flex: 4,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(28),
-                  child: controls,
-                ),
-              ),
-            ],
+            ),
           );
         }
 
-        // Narrow / mobile: single-column scroll
         return SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              preview,
-              const SizedBox(height: 16),
-              exportBar,
-              const SizedBox(height: 24),
-              controls,
-            ],
+          padding: const EdgeInsets.all(14),
+          child: FadeSlideIn(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 360, child: preview),
+                const SizedBox(height: 14),
+                exportBar,
+                const SizedBox(height: 16),
+                controls,
+              ],
+            ),
           ),
         );
       },
