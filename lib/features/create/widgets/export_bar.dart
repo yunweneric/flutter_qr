@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class ExportBar extends StatelessWidget {
   const ExportBar({
@@ -34,7 +35,7 @@ class ExportBar extends StatelessWidget {
                         color: scheme.onPrimary,
                       ),
                     )
-                  : const Icon(Icons.download_rounded, size: 17),
+                  : const HugeIcon(icon: HugeIcons.strokeRoundedDownload01, size: 17),
               label: Text(isBusy ? 'Working…' : 'Export PNG'),
             ),
           ),
@@ -45,7 +46,7 @@ class ExportBar extends StatelessWidget {
             height: 46,
             child: OutlinedButton.icon(
               onPressed: isBusy ? null : onSaveConfig,
-              icon: const Icon(Icons.bookmark_outline_rounded, size: 16),
+              icon: const HugeIcon(icon: HugeIcons.strokeRoundedBookmark01, size: 16),
               label: const Text('Save'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -59,7 +60,7 @@ class ExportBar extends StatelessWidget {
             height: 46,
             child: OutlinedButton.icon(
               onPressed: isBusy ? null : onLoadConfig,
-              icon: const Icon(Icons.folder_open_rounded, size: 16),
+              icon: const HugeIcon(icon: HugeIcons.strokeRoundedFolderOpen, size: 16),
               label: const Text('Load'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 8),

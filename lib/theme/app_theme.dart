@@ -19,30 +19,30 @@ class AppTokens {
 
 class AppTheme {
   static ThemeData light() => _build(
-        brightness: Brightness.light,
-        seed: AppTokens.brand,
-        scaffold: const Color(0xFFF6F6F8),
-        surface: Colors.white,
-        surfaceMuted: const Color(0xFFFAFAFB),
-        border: const Color(0xFFE7E7EB),
-        borderStrong: const Color(0xFFD9D9DF),
-        textStrong: const Color(0xFF09090B),
-        textMuted: const Color(0xFF71717A),
-        trackInactive: const Color(0xFFE4E4EA),
-      );
+    brightness: Brightness.light,
+    seed: AppTokens.brand,
+    scaffold: const Color(0xFFF6F6F8),
+    surface: Colors.white,
+    surfaceMuted: const Color(0xFFFAFAFB),
+    border: const Color(0xFFE7E7EB),
+    borderStrong: const Color(0xFFD9D9DF),
+    textStrong: const Color(0xFF09090B),
+    textMuted: const Color(0xFF71717A),
+    trackInactive: const Color(0xFFE4E4EA),
+  );
 
   static ThemeData dark() => _build(
-        brightness: Brightness.dark,
-        seed: AppTokens.brandDark,
-        scaffold: const Color(0xFF09090B),
-        surface: const Color(0xFF161619),
-        surfaceMuted: const Color(0xFF1B1B1F),
-        border: const Color(0xFF27272A),
-        borderStrong: const Color(0xFF34343A),
-        textStrong: const Color(0xFFFAFAFA),
-        textMuted: const Color(0xFFA1A1AA),
-        trackInactive: const Color(0xFF2A2A30),
-      );
+    brightness: Brightness.dark,
+    seed: AppTokens.brandDark,
+    scaffold: const Color(0xFF09090B),
+    surface: const Color(0xFF161619),
+    surfaceMuted: const Color(0xFF1B1B1F),
+    border: const Color(0xFF27272A),
+    borderStrong: const Color(0xFF34343A),
+    textStrong: const Color(0xFFFAFAFA),
+    textMuted: const Color(0xFFA1A1AA),
+    trackInactive: const Color(0xFF2A2A30),
+  );
 
   static ThemeData _build({
     required Brightness brightness,
@@ -59,10 +59,7 @@ class AppTheme {
     final scheme = ColorScheme.fromSeed(
       seedColor: seed,
       brightness: brightness,
-    ).copyWith(
-      surface: surface,
-      outlineVariant: border,
-    );
+    ).copyWith(surface: surface, outlineVariant: border);
 
     return ThemeData(
       useMaterial3: true,
@@ -88,8 +85,7 @@ class AppTheme {
         filled: true,
         fillColor: surfaceMuted,
         isDense: true,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTokens.radiusMd),
           borderSide: BorderSide(color: border),
@@ -113,33 +109,28 @@ class AppTheme {
           side: BorderSide(color: border),
         ),
       ),
-      dividerTheme: DividerThemeData(
-        color: border,
-        thickness: 1,
-        space: 1,
-      ),
+      dividerTheme: DividerThemeData(color: border, thickness: 1, space: 1),
       filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppTokens.radiusMd),
-          ),
-          textStyle: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.1,
-          ),
-        ).copyWith(
-          // A gentle lift on hover so the primary action feels responsive.
-          elevation: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.hovered)) return 4;
-            return 0;
-          }),
-          shadowColor: WidgetStateProperty.all(
-            seed.withValues(alpha: 0.5),
-          ),
-        ),
+        style:
+            FilledButton.styleFrom(
+              elevation: 0,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+              ),
+              textStyle: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.1,
+              ),
+            ).copyWith(
+              // A gentle lift on hover so the primary action feels responsive.
+              elevation: WidgetStateProperty.resolveWith((states) {
+                if (states.contains(WidgetState.hovered)) return 4;
+                return 0;
+              }),
+              shadowColor: WidgetStateProperty.all(seed.withValues(alpha: 0.5)),
+            ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
@@ -166,13 +157,11 @@ class AppTheme {
             if (states.contains(WidgetState.selected)) return scheme.primary;
             return textMuted;
           }),
-          elevation: WidgetStateProperty.resolveWith((states) =>
-              states.contains(WidgetState.selected) ? 1 : 0),
-          shadowColor: WidgetStateProperty.all(
-            Colors.black.withValues(alpha: 0.18),
+          elevation: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.selected) ? 1 : 0,
           ),
-          overlayColor:
-              WidgetStateProperty.all(scheme.primary.withValues(alpha: 0.06)),
+          shadowColor: WidgetStateProperty.all(Colors.black.withValues(alpha: 0.18)),
+          overlayColor: WidgetStateProperty.all(scheme.primary.withValues(alpha: 0.06)),
           side: WidgetStateProperty.all(BorderSide.none),
           textStyle: WidgetStateProperty.all(
             const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600),

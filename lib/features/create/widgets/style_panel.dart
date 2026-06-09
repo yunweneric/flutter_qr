@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qr/data/presets.dart';
 import 'package:flutter_qr/features/create/widgets/ui_kit.dart';
 import 'package:flutter_qr/models/qr_config.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class StylePanel extends StatelessWidget {
   const StylePanel({
@@ -40,7 +41,10 @@ class StylePanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // ── Content ──────────────────────────────────────────────
-            const SectionHeader(icon: Icons.edit_note_rounded, title: 'Content'),
+            const SectionHeader(
+              icon: HugeIcons.strokeRoundedNoteEdit,
+              title: 'Content',
+            ),
             const SizedBox(height: 10),
             TextField(
               controller: dataController,
@@ -49,9 +53,8 @@ class StylePanel extends StatelessWidget {
               style: const TextStyle(fontSize: 13),
               decoration: const InputDecoration(
                 hintText: 'Enter a URL, text, or other data…',
-                prefixIcon: Icon(Icons.tag_rounded, size: 17),
-                prefixIconConstraints:
-                    BoxConstraints(minWidth: 38, minHeight: 0),
+                prefixIcon: HugeIcon(icon: HugeIcons.strokeRoundedTag01, size: 17),
+                prefixIconConstraints: BoxConstraints(minWidth: 38, minHeight: 0),
               ),
             ),
             const SizedBox(height: 10),
@@ -73,7 +76,10 @@ class StylePanel extends StatelessWidget {
             const _Gap(),
 
             // ── Colors ───────────────────────────────────────────────
-            const SectionHeader(icon: Icons.palette_outlined, title: 'Colors'),
+            const SectionHeader(
+              icon: HugeIcons.strokeRoundedColorPicker,
+              title: 'Colors',
+            ),
             const SizedBox(height: 10),
             Row(
               children: [
@@ -134,7 +140,7 @@ class StylePanel extends StatelessWidget {
             const _Gap(),
 
             // ── Shape ────────────────────────────────────────────────
-            const SectionHeader(icon: Icons.interests_outlined, title: 'Shape'),
+            const SectionHeader(icon: HugeIcons.strokeRoundedShapes01, title: 'Shape'),
             const SizedBox(height: 10),
             const FieldLabel('Dots'),
             const SizedBox(height: 7),
@@ -175,8 +181,7 @@ class StylePanel extends StatelessWidget {
                         values: CornerShape.values,
                         selected: config.cornerDotShape,
                         labelOf: _cornerLabel,
-                        onChanged: (v) =>
-                            onChanged(config.copyWith(cornerDotShape: v)),
+                        onChanged: (v) => onChanged(config.copyWith(cornerDotShape: v)),
                       ),
                     ],
                   ),
@@ -187,7 +192,10 @@ class StylePanel extends StatelessWidget {
             const _Gap(),
 
             // ── Layout ───────────────────────────────────────────────
-            const SectionHeader(icon: Icons.tune_rounded, title: 'Layout'),
+            const SectionHeader(
+              icon: HugeIcons.strokeRoundedSlidersHorizontal,
+              title: 'Layout',
+            ),
             const SizedBox(height: 10),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,11 +230,9 @@ class StylePanel extends StatelessWidget {
 
             // ── Logo ─────────────────────────────────────────────────
             SectionHeader(
-              icon: Icons.image_outlined,
+              icon: HugeIcons.strokeRoundedImage01,
               title: 'Logo',
-              trailing: _hasLogo
-                  ? _RemoveButton(onTap: onClearLogo)
-                  : null,
+              trailing: _hasLogo ? _RemoveButton(onTap: onClearLogo) : null,
             ),
             const SizedBox(height: 10),
             Row(
@@ -237,9 +243,8 @@ class StylePanel extends StatelessWidget {
                     style: const TextStyle(fontSize: 13),
                     decoration: const InputDecoration(
                       hintText: 'Paste image URL',
-                      prefixIcon: Icon(Icons.link_rounded, size: 17),
-                      prefixIconConstraints:
-                          BoxConstraints(minWidth: 38, minHeight: 0),
+                      prefixIcon: HugeIcon(icon: HugeIcons.strokeRoundedLink01, size: 17),
+                      prefixIconConstraints: BoxConstraints(minWidth: 38, minHeight: 0),
                     ),
                     onChanged: (value) => onChanged(
                       config.copyWith(
@@ -261,7 +266,7 @@ class StylePanel extends StatelessWidget {
                       final file = result?.files.first;
                       if (file != null) onLogoPicked(file);
                     },
-                    icon: const Icon(Icons.upload_rounded, size: 16),
+                    icon: const HugeIcon(icon: HugeIcons.strokeRoundedUpload01, size: 16),
                     label: const Text('Upload'),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -333,7 +338,7 @@ class _RemoveButton extends StatelessWidget {
     final theme = Theme.of(context);
     return TextButton.icon(
       onPressed: onTap,
-      icon: const Icon(Icons.close_rounded, size: 14),
+      icon: const HugeIcon(icon: HugeIcons.strokeRoundedCancel01, size: 14),
       label: const Text('Remove'),
       style: TextButton.styleFrom(
         foregroundColor: theme.colorScheme.error,
@@ -347,14 +352,14 @@ class _RemoveButton extends StatelessWidget {
 }
 
 String _moduleLabel(ModuleShape s) => switch (s) {
-      ModuleShape.dots => 'Dots',
-      ModuleShape.smooth => 'Smooth',
-      ModuleShape.squares => 'Square',
-      ModuleShape.extraRounded => 'Rounded',
-    };
+  ModuleShape.dots => 'Dots',
+  ModuleShape.smooth => 'Smooth',
+  ModuleShape.squares => 'Square',
+  ModuleShape.extraRounded => 'Rounded',
+};
 
 String _cornerLabel(CornerShape s) => switch (s) {
-      CornerShape.dot => 'Dot',
-      CornerShape.square => 'Square',
-      CornerShape.extraRounded => 'Rounded',
-    };
+  CornerShape.dot => 'Dot',
+  CornerShape.square => 'Square',
+  CornerShape.extraRounded => 'Rounded',
+};

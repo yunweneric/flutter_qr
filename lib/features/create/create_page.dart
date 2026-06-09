@@ -101,9 +101,7 @@ class _CreatePageState extends State<CreatePage> {
           content: const Text('Done'),
           behavior: SnackBarBehavior.floating,
           width: 200,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       );
     } catch (error) {
@@ -112,9 +110,7 @@ class _CreatePageState extends State<CreatePage> {
         SnackBar(
           content: Text('Error: $error'),
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       );
     } finally {
@@ -167,8 +163,7 @@ class _CreatePageState extends State<CreatePage> {
 
     final exportBar = ExportBar(
       isBusy: _isBusy,
-      onDownloadPng: () =>
-          _runExport(() => _exportService.downloadPng(_config)),
+      onDownloadPng: () => _runExport(() => _exportService.downloadPng(_config)),
       onSaveConfig: () => _runExport(() => _exportService.saveConfig(_config)),
       onLoadConfig: () => _runExport(_loadConfigFromFile),
     );
@@ -204,9 +199,7 @@ class _CreatePageState extends State<CreatePage> {
                       flex: 54,
                       child: FadeSlideIn(
                         duration: const Duration(milliseconds: 620),
-                        child: SingleChildScrollView(
-                          child: controls,
-                        ),
+                        child: SingleChildScrollView(child: controls),
                       ),
                     ),
                   ],

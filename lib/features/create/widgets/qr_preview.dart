@@ -7,11 +7,7 @@ import 'package:flutter_qr/theme/app_theme.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class QrPreview extends StatelessWidget {
-  const QrPreview({
-    super.key,
-    required this.config,
-    required this.decoration,
-  });
+  const QrPreview({super.key, required this.config, required this.decoration});
 
   final QrConfig config;
   final PrettyQrDecoration decoration;
@@ -20,10 +16,7 @@ class QrPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final data = config.data.trim().isEmpty ? ' ' : config.data.trim();
-    final qrCode = QrCode.fromData(
-      data: data,
-      errorCorrectLevel: QrErrorCorrectLevel.H,
-    );
+    final qrCode = QrCode.fromData(data: data, errorCorrectLevel: QrErrorCorrectLevel.H);
     final qrImage = QrImage(qrCode);
 
     return Card(
@@ -75,17 +68,16 @@ class QrPreview extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            theme.colorScheme.surfaceContainerHighest
-                                .withValues(alpha: 0.45),
-                            theme.colorScheme.surfaceContainerHighest
-                                .withValues(alpha: 0.18),
+                            theme.colorScheme.surfaceContainerHighest.withValues(
+                              alpha: 0.45,
+                            ),
+                            theme.colorScheme.surfaceContainerHighest.withValues(
+                              alpha: 0.18,
+                            ),
                           ],
                         ),
-                        borderRadius:
-                            BorderRadius.circular(AppTokens.radiusLg),
-                        border: Border.all(
-                          color: theme.colorScheme.outlineVariant,
-                        ),
+                        borderRadius: BorderRadius.circular(AppTokens.radiusLg),
+                        border: Border.all(color: theme.colorScheme.outlineVariant),
                       ),
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 260),
@@ -105,10 +97,7 @@ class QrPreview extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: PrettyQrView(
-                              qrImage: qrImage,
-                              decoration: decoration,
-                            ),
+                            child: PrettyQrView(qrImage: qrImage, decoration: decoration),
                           ),
                         ),
                       ),
@@ -119,9 +108,7 @@ class QrPreview extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              config.data.trim().isEmpty
-                  ? 'Empty content'
-                  : config.data.trim(),
+              config.data.trim().isEmpty ? 'Empty content' : config.data.trim(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qr/features/create/create_page.dart';
 import 'package:flutter_qr/theme/app_theme.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class FlutterQrApp extends StatefulWidget {
   const FlutterQrApp({super.key});
@@ -36,17 +37,18 @@ class _FlutterQrAppState extends State<FlutterQrApp> {
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: 24,
                 height: 24,
-                decoration: BoxDecoration(
+                child: ColoredBox(
                   color: const Color(0xFF02569B),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: const Icon(
-                  Icons.qr_code_rounded,
-                  color: Colors.white,
-                  size: 14,
+                  child: Center(
+                    child: HugeIcon(
+                      icon: HugeIcons.strokeRoundedQrCode01,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
@@ -57,8 +59,7 @@ class _FlutterQrAppState extends State<FlutterQrApp> {
             IconButton(
               tooltip: _isDark ? 'Switch to light' : 'Switch to dark',
               onPressed: () => setState(() {
-                _themeMode =
-                    _isDark ? ThemeMode.light : ThemeMode.dark;
+                _themeMode = _isDark ? ThemeMode.light : ThemeMode.dark;
               }),
               icon: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
@@ -67,10 +68,10 @@ class _FlutterQrAppState extends State<FlutterQrApp> {
                   turns: Tween<double>(begin: 0.6, end: 1).animate(animation),
                   child: FadeTransition(opacity: animation, child: child),
                 ),
-                child: Icon(
-                  _isDark
-                      ? Icons.light_mode_outlined
-                      : Icons.dark_mode_outlined,
+                child: HugeIcon(
+                  icon: _isDark
+                      ? HugeIcons.strokeRoundedSun01
+                      : HugeIcons.strokeRoundedMoon01,
                   key: ValueKey(_isDark),
                   size: 18,
                 ),

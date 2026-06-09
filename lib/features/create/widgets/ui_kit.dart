@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qr/theme/app_theme.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 /// Small, consistent building blocks shared across the editor so every section
 /// reads with the same rhythm, spacing and weight.
 
 /// A titled section: a tinted icon chip, an uppercase label and the body.
 class SectionHeader extends StatelessWidget {
-  const SectionHeader({super.key, required this.icon, required this.title, this.trailing});
+  const SectionHeader({
+    super.key,
+    required this.icon,
+    required this.title,
+    this.trailing,
+  });
 
-  final IconData icon;
+  final List<List<dynamic>> icon;
   final String title;
   final Widget? trailing;
 
@@ -24,7 +30,11 @@ class SectionHeader extends StatelessWidget {
             color: theme.colorScheme.primary.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(7),
           ),
-          child: Icon(icon, size: 13, color: theme.colorScheme.primary),
+          child: HugeIcon(
+            icon: icon,
+            size: 13,
+            color: theme.colorScheme.primary,
+          ),
         ),
         const SizedBox(width: 9),
         Text(
@@ -202,10 +212,7 @@ class _SwatchTileState extends State<SwatchTile> {
                   decoration: BoxDecoration(
                     color: widget.color,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: theme.colorScheme.outlineVariant,
-                      width: 1,
-                    ),
+                    border: Border.all(color: theme.colorScheme.outlineVariant, width: 1),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -272,8 +279,7 @@ class SegmentControl<T> extends StatelessWidget {
       ),
       child: SegmentedButton<T>(
         segments: [
-          for (final v in values)
-            ButtonSegment<T>(value: v, label: Text(labelOf(v))),
+          for (final v in values) ButtonSegment<T>(value: v, label: Text(labelOf(v))),
         ],
         selected: {selected},
         showSelectedIcon: false,
@@ -317,8 +323,7 @@ class _PresetChipState extends State<PresetChip> {
     } else if (_hovered) {
       background = theme.colorScheme.primary.withValues(alpha: 0.1);
     } else {
-      background =
-          theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5);
+      background = theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5);
     }
 
     return MouseRegion(
@@ -345,8 +350,8 @@ class _PresetChipState extends State<PresetChip> {
                 color: selected
                     ? theme.colorScheme.primary
                     : _hovered
-                        ? theme.colorScheme.primary.withValues(alpha: 0.4)
-                        : theme.colorScheme.outlineVariant,
+                    ? theme.colorScheme.primary.withValues(alpha: 0.4)
+                    : theme.colorScheme.outlineVariant,
               ),
             ),
             child: Text(
@@ -390,10 +395,7 @@ class FadeSlideIn extends StatelessWidget {
       builder: (context, t, child) {
         return Opacity(
           opacity: t.clamp(0.0, 1.0),
-          child: Transform.translate(
-            offset: Offset(0, offset * (1 - t)),
-            child: child,
-          ),
+          child: Transform.translate(offset: Offset(0, offset * (1 - t)), child: child),
         );
       },
       child: child,
