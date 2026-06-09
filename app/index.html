@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Mini QR-style customizable QR code generator.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Mini QR">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Mini QR</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    :root {
+      --bg: #F6F6F8;
+      --brand: #6366F1;
+      --text: #18181B;
+      --track: #E4E4EA;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #09090B;
+        --brand: #818CF8;
+        --text: #FAFAFA;
+        --track: #27272A;
+      }
+    }
+
+    html, body { margin: 0; padding: 0; height: 100%; background: var(--bg); }
+
+    #mini-qr-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+      opacity: 1;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+    #mini-qr-loader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .mq-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.35);
+      animation: mq-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both,
+                 mq-breathe 2.4s ease-in-out 0.6s infinite;
+    }
+    .mq-logo svg { width: 30px; height: 30px; }
+
+    .mq-title {
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      margin: 0;
+      opacity: 0;
+      animation: mq-fade-up 0.5s ease 0.15s both;
+    }
+
+    .mq-track {
+      width: 132px;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--track);
+      overflow: hidden;
+      position: relative;
+    }
+    .mq-track::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 42%;
+      border-radius: 99px;
+      background: var(--brand);
+      animation: mq-slide 1.15s ease-in-out infinite;
+    }
+
+    @keyframes mq-pop {
+      from { transform: scale(0.6); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    @keyframes mq-breathe {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-4px) scale(1.04); }
+    }
+    @keyframes mq-fade-up {
+      from { transform: translateY(6px); opacity: 0; }
+      to   { transform: translateY(0);   opacity: 1; }
+    }
+    @keyframes mq-slide {
+      0%   { left: -42%; }
+      100% { left: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mq-logo, .mq-title { animation: none; opacity: 1; }
+      .mq-track::after { animation-duration: 2s; }
+    }
+  </style>
+</head>
+<body>
+  <div id="mini-qr-loader">
+    <div class="mq-logo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fff" d="M3 3h7v7H3V3zm2 2v3h3V5H5zM3 14h7v7H3v-7zm2 2v3h3v-3H5zM14 3h7v7h-7V3zm2 2v3h3V5h-3zM14 14h3v3h-3v-3zM18 14h3v3h-3v-3zM14 18h3v3h-3v-3zM18 18h3v3h-3v-3z"/>
+      </svg>
+    </div>
+    <p class="mq-title">Mini QR</p>
+    <div class="mq-track"></div>
+  </div>
+
+  <script>
+    // Fades out and removes the splash once Flutter paints its first frame.
+    window.__removeMiniQrLoader = function () {
+      var el = document.getElementById('mini-qr-loader');
+      if (!el || el.classList.contains('loaded')) return;
+      el.classList.add('loaded');
+      window.setTimeout(function () {
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+      }, 500);
+    };
+    // Safety net: never trap the user behind the splash.
+    window.setTimeout(function () { window.__removeMiniQrLoader(); }, 15000);
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
