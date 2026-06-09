@@ -1,11 +1,11 @@
 {
-    "name": "flutter_qr",
-    "short_name": "flutter_qr",
+    "name": "Flutter QR",
+    "short_name": "Flutter QR",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#02569B",
+    "theme_color": "#02569B",
+    "description": "Customizable QR code generator for the web.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

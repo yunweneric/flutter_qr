@@ -490,6 +490,7 @@ class CompiledApp {
       _1393: s => JSON.stringify(s),
       _1394: s => printToConsole(s),
       _1395: (o, p, r) => o.replaceAll(p, () => r),
+      _1396: (o, p, r) => o.replace(p, () => r),
       _1397: Function.prototype.call.bind(String.prototype.toLowerCase),
       _1398: s => s.toUpperCase(),
       _1399: s => s.trim(),
@@ -608,6 +609,7 @@ class CompiledApp {
             constructor, [null, ...args]);
         return new factoryFunction();
       },
+      _1518: (o, p) => p in o,
       _1519: (o, p) => o[p],
       _1520: (o, p, v) => o[p] = v,
       _1521: (o, m, a) => o[m].apply(o, a),
@@ -659,6 +661,18 @@ class CompiledApp {
           setValue(wasmArray, wasmArrayOffset + i, jsArray[jsArrayOffset + i]);
         }
       },
+      _1534: (jsArray, jsArrayOffset, wasmArray, wasmArrayOffset, length) => {
+        const getValue = dartInstance.exports.$wasmI16ArrayGet;
+        for (let i = 0; i < length; i++) {
+          jsArray[jsArrayOffset + i] = getValue(wasmArray, wasmArrayOffset + i);
+        }
+      },
+      _1535: (jsArray, jsArrayOffset, wasmArray, wasmArrayOffset, length) => {
+        const setValue = dartInstance.exports.$wasmI16ArraySet;
+        for (let i = 0; i < length; i++) {
+          setValue(wasmArray, wasmArrayOffset + i, jsArray[jsArrayOffset + i]);
+        }
+      },
       _1536: (jsArray, jsArrayOffset, wasmArray, wasmArrayOffset, length) => {
         const getValue = dartInstance.exports.$wasmI32ArrayGet;
         for (let i = 0; i < length; i++) {
@@ -703,6 +717,7 @@ class CompiledApp {
         return s;
       },
       _1545: x0 => x0.index,
+      _1546: x0 => x0.groups,
       _1547: x0 => x0.flags,
       _1548: x0 => x0.multiline,
       _1549: x0 => x0.ignoreCase,
@@ -714,48 +729,48 @@ class CompiledApp {
       _1564: f => finalizeWrapper(f, function(x0) { return dartInstance.exports._1564(f,arguments.length,x0) }),
       _1566: (x0,x1,x2,x3) => x0.addEventListener(x1,x2,x3),
       _1567: (x0,x1,x2,x3) => x0.removeEventListener(x1,x2,x3),
-      _1576: (x0,x1) => x0.append(x1),
-      _1577: x0 => x0.remove(),
-      _1578: (x0,x1) => x0.key(x1),
-      _1579: x0 => x0.random(),
-      _1582: () => globalThis.Math,
-      _1592: Function.prototype.call.bind(Number.prototype.toString),
-      _1593: Function.prototype.call.bind(BigInt.prototype.toString),
-      _1594: Function.prototype.call.bind(Number.prototype.toString),
-      _1595: (d, digits) => d.toFixed(digits),
-      _1599: () => globalThis.window._flutter_skwasmInstance,
-      _1600: () => globalThis.window.flutterCanvasKit,
-      _1601: () => globalThis.document,
-      _1622: (x0,x1) => { x0.src = x1 },
-      _1623: x0 => x0.naturalWidth,
-      _1624: x0 => x0.naturalHeight,
-      _1640: x0 => x0.status,
-      _1641: (x0,x1) => { x0.responseType = x1 },
-      _1643: x0 => x0.response,
-      _1757: (x0,x1) => { x0.draggable = x1 },
-      _1773: x0 => x0.style,
-      _2132: (x0,x1) => { x0.download = x1 },
-      _2157: (x0,x1) => { x0.href = x1 },
-      _2702: (x0,x1) => { x0.accept = x1 },
-      _2716: x0 => x0.files,
-      _2742: (x0,x1) => { x0.multiple = x1 },
-      _2760: (x0,x1) => { x0.type = x1 },
-      _3479: () => globalThis.window,
-      _3806: x0 => x0.localStorage,
-      _4139: x0 => x0.length,
-      _6146: x0 => x0.firstChild,
-      _6157: () => globalThis.document,
-      _6239: x0 => x0.body,
-      _6575: (x0,x1) => { x0.id = x1 },
-      _6602: x0 => x0.children,
-      _8104: x0 => x0.size,
-      _8105: x0 => x0.type,
-      _8112: x0 => x0.name,
-      _8118: x0 => x0.length,
-      _8123: x0 => x0.result,
-      _11033: (x0,x1) => { x0.display = x1 },
-      _12998: () => globalThis.__removeMiniQrLoader(),
-      _12999: () => globalThis.__removeMiniQrLoader,
+      _1586: (x0,x1) => x0.append(x1),
+      _1587: x0 => x0.remove(),
+      _1588: (x0,x1) => x0.key(x1),
+      _1589: x0 => x0.random(),
+      _1592: () => globalThis.Math,
+      _1602: Function.prototype.call.bind(Number.prototype.toString),
+      _1603: Function.prototype.call.bind(BigInt.prototype.toString),
+      _1604: Function.prototype.call.bind(Number.prototype.toString),
+      _1605: (d, digits) => d.toFixed(digits),
+      _1609: () => globalThis.window._flutter_skwasmInstance,
+      _1610: () => globalThis.window.flutterCanvasKit,
+      _1611: () => globalThis.document,
+      _1632: (x0,x1) => { x0.src = x1 },
+      _1633: x0 => x0.naturalWidth,
+      _1634: x0 => x0.naturalHeight,
+      _1650: x0 => x0.status,
+      _1651: (x0,x1) => { x0.responseType = x1 },
+      _1653: x0 => x0.response,
+      _1767: (x0,x1) => { x0.draggable = x1 },
+      _1783: x0 => x0.style,
+      _2142: (x0,x1) => { x0.download = x1 },
+      _2167: (x0,x1) => { x0.href = x1 },
+      _2712: (x0,x1) => { x0.accept = x1 },
+      _2726: x0 => x0.files,
+      _2752: (x0,x1) => { x0.multiple = x1 },
+      _2770: (x0,x1) => { x0.type = x1 },
+      _3489: () => globalThis.window,
+      _3816: x0 => x0.localStorage,
+      _4149: x0 => x0.length,
+      _6155: x0 => x0.firstChild,
+      _6166: () => globalThis.document,
+      _6248: x0 => x0.body,
+      _6584: (x0,x1) => { x0.id = x1 },
+      _6611: x0 => x0.children,
+      _8112: x0 => x0.size,
+      _8113: x0 => x0.type,
+      _8120: x0 => x0.name,
+      _8126: x0 => x0.length,
+      _8131: x0 => x0.result,
+      _11040: (x0,x1) => { x0.display = x1 },
+      _13005: () => globalThis.__removeFlutterQrLoader(),
+      _13006: () => globalThis.__removeFlutterQrLoader,
 
     };
 
