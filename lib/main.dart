@@ -3,7 +3,7 @@ import 'package:flutter_qr/app.dart';
 import 'package:flutter_qr/services/web_loader.dart';
 
 void main() {
-  runApp(const MiniQrApp());
+  runApp(const FlutterQrApp());
   // Dismiss the HTML splash once the first frame has been rendered.
   WidgetsBinding.instance.addPostFrameCallback((_) => removeWebLoader());
 }

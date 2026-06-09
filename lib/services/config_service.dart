@@ -2,7 +2,7 @@ import 'package:flutter_qr/models/qr_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigService {
-  static const _storageKey = 'mini_qr_config';
+  static const _storageKey = 'flutter_qr_config';
 
   Future<void> save(QrConfig config) async {
     final prefs = await SharedPreferences.getInstance();

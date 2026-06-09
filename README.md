@@ -1,6 +1,6 @@
-# Mini QR
+# Flutter QR
 
-Mini QR is a polished Flutter web app for generating, styling, and exporting custom QR codes. It combines a live preview, theme presets, logo support, and quick export workflows so you can tailor a QR code for links, product pages, event invites, or internal tools.
+Flutter QR is a polished Flutter web app for generating, styling, and exporting custom QR codes. It combines a live preview, theme presets, logo support, and quick export workflows so you can tailor a QR code for links, product pages, event invites, or internal tools.
 
 ## Why this project exists
 
@@ -21,7 +21,7 @@ This app was built to make QR code customization simple:
 
 ## Screenshots
 
-![Mini QR preview](docs/screenshots/app-preview.png)
+![Flutter QR preview](docs/screenshots/app-preview.png)
 
 ## Try it
 

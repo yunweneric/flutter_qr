@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qr/features/create/create_page.dart';
 import 'package:flutter_qr/theme/app_theme.dart';
 
-class MiniQrApp extends StatefulWidget {
-  const MiniQrApp({super.key});
+class FlutterQrApp extends StatefulWidget {
+  const FlutterQrApp({super.key});
 
   @override
-  State<MiniQrApp> createState() => _MiniQrAppState();
+  State<FlutterQrApp> createState() => _FlutterQrAppState();
 }
 
-class _MiniQrAppState extends State<MiniQrApp> {
+class _FlutterQrAppState extends State<FlutterQrApp> {
   ThemeMode _themeMode = ThemeMode.system;
 
   bool get _isDark {
@@ -23,7 +23,7 @@ class _MiniQrAppState extends State<MiniQrApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mini QR',
+      title: 'Flutter QR',
       debugShowCheckedModeBanner: false,
       themeMode: _themeMode,
       theme: AppTheme.light(),
@@ -40,7 +40,7 @@ class _MiniQrAppState extends State<MiniQrApp> {
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6366F1),
+                  color: const Color(0xFF02569B),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: const Icon(
@@ -50,7 +50,7 @@ class _MiniQrAppState extends State<MiniQrApp> {
                 ),
               ),
               const SizedBox(width: 8),
-              const Text('Mini QR'),
+              const Text('Flutter QR'),
             ],
           ),
           actions: [
